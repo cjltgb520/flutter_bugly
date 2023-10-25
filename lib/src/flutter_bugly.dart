@@ -71,7 +71,7 @@ class FlutterBugly {
     await _channel.invokeMethod('putUserData', map);
   }
 
-  ///自定义日志日志，随崩溃信息上报
+  ///自定义日志，随崩溃信息上报
   static Future<Null> buglyLog(
       {required String key, required String value, required String level}) async {
     assert(key.isNotEmpty);
