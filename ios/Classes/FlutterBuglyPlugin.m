@@ -24,6 +24,8 @@
           [Bugly startWithAppId:appId config:config];
           NSLog(@"Bugly appId: %@", appId);
 
+          [BuglyLog initLogger: BuglyLogLevelVerbose consolePrint:true]; // 初始化日志
+          
           NSDictionary * dict = @{@"message":@"Bugly 初始化成功",@"appId":appId, @"isSuccess":@YES};
           NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
           NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -72,6 +74,16 @@
       NSString *value = call.arguments[@"value"];
       if (![self isBlankString:key]&&![self isBlankString:value]){
           [Bugly setUserValue:value forKey:key];
+      }
+      result(nil);
+  }else if([@"buglyLog" isEqualToString:call.method]){///自定义日志
+      NSString *tag = call.arguments[@"tag"];
+      NSString *msg = call.arguments[@"message"];
+      if([@"i" isEqualToString:call.arguments[@"level"]]){
+          BLYLogInfo(@"tag: %@, message: %@", tag, msg);
+      }
+      if([@"e" isEqualToString:call.arguments[@"level"]]){
+          BLYLogError(@"tag: %@, message: %@", tag, msg);
       }
       result(nil);
   }else {

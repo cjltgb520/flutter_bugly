@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.crazecoder.flutterbugly.bean.BuglyInitResultInfo;
 import com.crazecoder.flutterbugly.utils.JsonUtil;
 import com.crazecoder.flutterbugly.utils.MapUtil;
+import com.tencent.bugly.crashreport.BuglyLog;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import io.flutter.BuildConfig;
@@ -91,6 +92,15 @@ public class FlutterBuglyPlugin implements FlutterPlugin, MethodCallHandler, Act
         } else if (call.method.equals("postCatchedException")) {
             postException(call);
             result(null);
+        } else if(call.method.equals("buglyLog")){
+            String tag = call.argument("tag");
+            String msg = call.argument("message");
+            if (call.argument("level").equals("i")) {
+                BuglyLog.i(tag, msg);
+            }
+            if (call.argument("level").equals("e")) {
+                BuglyLog.e(tag, msg);
+            }
         } else {
             result.notImplemented();
             isResultSubmitted = true;
