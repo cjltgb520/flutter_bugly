@@ -97,8 +97,7 @@ public class FlutterBuglyPlugin implements FlutterPlugin, MethodCallHandler, Act
             String msg = call.argument("message");
             if (call.argument("level").equals("i")) {
                 BuglyLog.i(tag, msg);
-            }
-            if (call.argument("level").equals("e")) {
+            } else if (call.argument("level").equals("e")) {
                 BuglyLog.e(tag, msg);
             }
         } else {

@@ -81,8 +81,7 @@
       NSString *msg = call.arguments[@"message"];
       if([@"i" isEqualToString:call.arguments[@"level"]]){
           BLYLogInfo(@"tag: %@, message: %@", tag, msg);
-      }
-      if([@"e" isEqualToString:call.arguments[@"level"]]){
+      }else if([@"e" isEqualToString:call.arguments[@"level"]]){
           BLYLogError(@"tag: %@, message: %@", tag, msg);
       }
       result(nil);
