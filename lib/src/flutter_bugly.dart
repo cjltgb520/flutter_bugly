@@ -15,6 +15,7 @@ class FlutterBugly {
 
   ///初始化
   static Future<InitResultInfo> init({
+    required String appBundle,
     String? androidAppId,
     String? iOSAppId,
     String? channel, //自定义渠道标识
@@ -23,6 +24,7 @@ class FlutterBugly {
     assert((Platform.isAndroid && androidAppId != null) ||
         (Platform.isIOS && iOSAppId != null));
     Map<String, Object?> map = {
+      "appBundle": appBundle,
       "appId": Platform.isAndroid ? androidAppId : iOSAppId,
       "channel": channel,
       "initDelay": initDelay,

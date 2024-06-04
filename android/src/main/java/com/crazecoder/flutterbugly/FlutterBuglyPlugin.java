@@ -64,6 +64,9 @@ public class FlutterBuglyPlugin implements FlutterPlugin, MethodCallHandler, Act
                     if (!TextUtils.isEmpty(channel))
                         strategy.setAppChannel(channel);
                 }
+                String appBundle = call.argument("appBundle");
+                if (!TextUtils.isEmpty(appBundle))
+                    strategy.setAppVersion(appBundle);
                 CrashReport.initCrashReport(activity.getApplicationContext(), appId, BuildConfig.DEBUG,strategy);
                 result(getResultBean(true, appId, "Bugly 初始化成功"));
             } else {

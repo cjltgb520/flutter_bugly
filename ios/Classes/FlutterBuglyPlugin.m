@@ -21,6 +21,11 @@
           if(!isChannelEmpty){
             config.channel = channel;
           }
+          NSString *appBundle = call.arguments[@"appBundle"];
+          BOOL isAppBundleEmpty = [self isBlankString:channel];
+          if(!isAppBundleEmpty){
+            config.version = appBundle;
+          }
           [Bugly startWithAppId:appId config:config];
           NSLog(@"Bugly appId: %@", appId);
 
